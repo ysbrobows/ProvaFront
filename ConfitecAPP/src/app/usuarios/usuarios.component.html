@@ -1,0 +1,64 @@
+<div class="col-sm-12">
+<h3>Listagem Usuarios </h3>
+</div>
+
+<div class="col-sm-6">
+  <button (click)="criarSelecionado()" class="btn btn-sm btn-outline-success">Novo Usuário</button>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">Sobrenome</th>
+            <th scope="col">Email</th>
+            <th scope="col">Data Nascimento</th>
+            <th scope="col">Editar</th>
+            <th scope="col">Excluir</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let c of usuarios">
+            <td scope="row">{{c.nome}}</td>
+            <td>{{c.sobrenome}}</td>
+            <td>{{c.email}}</td>
+            <td>{{c.dataNascimento | date:"dd/MM/yyyy" }}</td>              
+            <td><button (click)="editarSelecionado(c)" class="btn btn-sm btn-outline-primary">Editar</button></td>
+            <td><button (click)="excluirSelecionado(c)" class="btn btn-sm btn-outline-danger">Excluir</button></td>    
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="offset-md-1 col-sm-5" >
+        <form>
+            <div class="mb-3">
+              <label for="nome" class="form-label">Nome</label>
+              <input type="text" [(ngModel)]="userInput.nome" value="{{usuarioSelecionado.nome}}" class="form-control" id="nome" name="nome">
+            </div>
+            <div class="mb-3">
+              <label for="sobrenome" class="form-label">Sobrenome</label>
+              <input type="text" [(ngModel)]="userInput.sobrenome" value="{{usuarioSelecionado.sobrenome}}" class="form-control" id="sobre" name="sobrenome">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" [(ngModel)]="userInput.email" value="{{usuarioSelecionado.email}}" class="form-control" id="email" name="email">
+            </div>
+            <div class="mb-3">
+                <label for="text" class="form-label">Data de Nascimento</label>
+                <input type="text" [(ngModel)]="userInput.dataNascimento" value="{{usuarioSelecionado.dataNascimento | date:'dd/MM/yyyy'}}" class="form-control" id="dtnasc" name="dataNascimento">
+            </div>
+            <div class="mb-3">
+
+            <label class="form-label">Escolaridade</label>
+              <select name="Ensino" [(ngModel)]="userInput.escolaridade" class="form-select" name="escolaridade">
+                <option value="1">Infantil</option>
+                <option value="2">Fundamental</option>
+                <option value="3">Medio</option>
+                <option value="4">Superior</option>        
+            </select>
+            </div>
+            <button (click)="criar(userInput)" *ngIf="acao == 1 || acao == 0" type="submit" class="btn btn-success">Criar novo</button>
+            <button (click)="editar(userInput)" *ngIf="acao == 2" type="submit" class="btn btn-warning">Editar</button>
+            <button (click)="excluir(userInput)" *ngIf="acao == 3" type="submit" class="btn btn-danger">Excluir</button>
+        </form>
+
+</div>
